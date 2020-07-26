@@ -1,0 +1,117 @@
+﻿@model Final_Project.Models.User
+
+@{
+    ViewBag.Title = "Login Screen";
+    Layout = "~/Views/Login/loginViewLayout.cshtml";
+    if (TempData["message"] != null)
+    {
+        <script type="text/javascript">
+        alert(@Html.Raw(Json.Encode(TempData["message"])));
+        </script>
+    }
+}
+
+<h2></h2>
+
+
+@using (Html.BeginForm("Autherize", "Login", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class="col-md-10 ">
+                <h3>Login</h3>
+            </div>
+        </div>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class=" form-group ">
+            @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10 ">
+                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Login_Password, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10 ">
+                @Html.EditorFor(model => model.Login_Password, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Login_Password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Login" class="btn btn-default" />
+            </div>
+        </div>
+        <label class="field-validation-error">@Html.DisplayFor(model => model.LoginErrorMessage) </label>
+    </div>
+
+}
+<div class="form-text">
+    <span class="col-md-offset-2  ">
+        Don’t have an account?
+    </span>
+
+    @Html.ActionLink("Sign Up", "SignUp")
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+@*<div class="form-horizontal">
+    <h4>Sign up for New User</h4>
+    <hr />
+
+    </div>
+    {
+    <table>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.UserName)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.UserName)
+            </td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td>@Html.ValidationMessageFor(model => model.UserName)</td>
+        </tr>
+
+
+        <tr>
+            <td>@Html.LabelFor(model => model.Login_Password) </td>
+            <td>@Html.EditorFor(model => model.Login_Password) </td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td>@Html.ValidationMessageFor(model => model.Login_Password)</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <label class="field-validation-error">@Html.DisplayFor(model => model.LoginErrorMessage) </label>
+            </td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" name="Name" value="Login " />
+                <input type="reset" name=" Name" value=" Clear" />
+            </td>
+        </tr>
+
+
+
+    </table>
+
+    }
+    }
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }*@
