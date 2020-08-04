@@ -17,6 +17,7 @@ namespace Final_Project.Controllers
             return View();
         }
 
+
         public ActionResult About()
         {
             ViewBag.Message = "Personal Care Assistance - You can breathe easily";
@@ -99,7 +100,79 @@ namespace Final_Project.Controllers
                 globalVariables.Alcohol = false;
 
 
-            return View("~/Views/Login/Index.cshtml");
+            return Redirect("~/login/index");
+            //return View("~/Views/Login/Index.cshtml");
+        }
+        
+        [HttpPost]
+        public ActionResult GetDiseaseTable(Diseases model)
+        {
+            if (ModelState.IsValid)
+            {
+                DataLibrary.Models.User.AllDisease DiseasesX = new DataLibrary.Models.User.AllDisease
+                {
+                    Disease = model.Disease,
+                    Description = model.Description
+                };
+                if (model.Disease == null)
+                {
+                    DiseasesX.Disease = "";
+                    DiseasesX.Description = "";
+                }
+                DiseasesX = DataLibrary.Logic.User.Disease.GetDisease(DiseasesX);
+                
+                globalVariables.Disease = DiseasesX.Disease;
+                globalVariables.Description = DiseasesX.Description;
+                
+            }
+            return RedirectToAction("Disease_Table");
+        }
+
+        public ActionResult Disease_Table()
+        {
+            Models.Diseases DiseasesX = new Models.Diseases
+            {
+                Disease = globalVariables.Disease,
+                Description = globalVariables.Description
+            };
+            ViewBag.data = DiseasesX.Description;
+
+
+            return View(DiseasesX);
+        }//This function is used to store/show the disease Description  
+
+        [HttpGet]
+        public ActionResult GetAllSymptoms()
+        {
+            List<DataLibrary.Models.User.user_symptoms> list = new List<DataLibrary.Models.User.user_symptoms>();
+
+            list =  DataLibrary.Logic.User.symptoms.GetAllSymptoms();
+            //ViewBag.data = symptoms.symptoms;
+
+            return View(list);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult GetAllSymptoms(List<DataLibrary.Models.User.user_symptoms> list)
+        {
+            List<int> symptomIDs = new List<int>();
+            foreach (DataLibrary.Models.User.user_symptoms symptom in list)
+            {
+                if (symptom.Checked == true)
+                {
+                    if (symptomIDs.Count >= 17)
+                    {
+                        //userModel.LoginErrorMessage = "You selected more than 17 symptoms please select only up to 17 symptoms";
+                        //return View("Index", userModel);
+                    }
+                    else
+                    {
+                        symptomIDs.Add(symptom.Id);
+                    }
+                }
+            }
+            return View(list);
         }
     }
 }

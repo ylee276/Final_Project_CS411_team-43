@@ -1,0 +1,33 @@
+﻿@model List<DataLibrary.Models.User.user_symptoms>
+@{
+    ViewBag.Title = "All Symptoms";
+}
+
+
+@using (Html.BeginForm("GetAllSymptoms", "Home"))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+            <h4>All Symptoms stored</h4>
+        </div>
+    <div>
+
+        @for (int i = 0; i < Model.Count(); i++)
+        {
+            @Html.HiddenFor(it => it[i].Id)
+            @Html.DisplayFor(it => it[i].symptom)
+            @Html.HiddenFor(it => it[i].symptom)
+            @Html.CheckBoxFor(it => it[i].Checked)
+            <br />
+        }
+
+
+        <input id="Submit1" type="submit" value="submit" />
+    </div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

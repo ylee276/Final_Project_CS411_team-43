@@ -147,6 +147,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Diseases.cs" />
     <Compile Include="Models\LoginModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -166,6 +167,8 @@
       <DependentUpon>LoginModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserLog.cs" />
+    <Compile Include="Models\user_input_sym.cs" />
+    <Compile Include="Models\User_symptoms.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -174,6 +177,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\cosmoTheme.css" />
+    <Content Include="Content\theme_1.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -225,6 +230,8 @@
     <Content Include="Views\Login\loginViewLayout.cshtml" />
     <Content Include="Views\Login\SignUp.cshtml" />
     <Content Include="Views\Home\userAccount.cshtml" />
+    <Content Include="Views\Home\Disease_Table.cshtml" />
+    <Content Include="Views\Home\GetAllSymptoms.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
