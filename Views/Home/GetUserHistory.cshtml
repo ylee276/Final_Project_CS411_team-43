@@ -1,0 +1,43 @@
+﻿@model List<DataLibrary.Models.User.User_history>
+@{
+    ViewBag.Title = "User History";
+   
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <h3>History</h3>
+    </div>
+    <div>
+        <h4>Name</h4> <h5>@Html.DisplayFor(it => it[0].Name)</h5>
+        <h4>Age</h4> <h5>@Html.DisplayFor(it => it[0].Age)</h5>
+        <h4>Weight</h4> <h5>@Html.DisplayFor(it => it[0].Weight)</h5>
+
+
+
+
+        <h4>Diabetic</h4> <h6>@Html.DisplayFor(it => it[0].Diabetic)</h6>
+        <h4>HBP</h4> <h6>@Html.DisplayFor(it => it[0].HBP)</h6>
+        <h4>Smoking</h4> <h6>@Html.DisplayFor(it => it[0].Smoke)</h6>
+        <h4>Drinking</h4> <h6> @Html.DisplayFor(it => it[0].Alcohol)</h6>
+       
+
+
+
+        <h4>User Symptom</h4>
+        @for (int i = 0; i < Model.Count(); i++)
+        {
+            int y = i + 1;
+            <h4>@y:  @Html.DisplayFor(it => it[i].Symptom) </h4>
+        }
+    </div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

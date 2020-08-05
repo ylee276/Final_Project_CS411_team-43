@@ -167,6 +167,7 @@
       <DependentUpon>LoginModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserLog.cs" />
+    <Compile Include="Models\user_history.cs" />
     <Compile Include="Models\user_input_sym.cs" />
     <Compile Include="Models\User_symptoms.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -224,7 +225,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Login\loginViewLayout.cshtml" />
@@ -232,6 +232,8 @@
     <Content Include="Views\Home\userAccount.cshtml" />
     <Content Include="Views\Home\Disease_Table.cshtml" />
     <Content Include="Views\Home\GetAllSymptoms.cshtml" />
+    <Content Include="Views\Home\GetUserHistory.cshtml" />
+    <Content Include="Views\Home\LogOut.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -14,13 +14,27 @@ namespace Final_Project.Controllers
     {
         public ActionResult Index()
         {
+
+
             return View();
         }
 
-
-        public ActionResult About()
+        [HttpGet]
+        public ActionResult GetUserHistory()
         {
-            ViewBag.Message = "Personal Care Assistance - You can breathe easily";
+            List<DataLibrary.Models.User.User_history> list = new List<DataLibrary.Models.User.User_history>();
+
+            list = DataLibrary.Logic.User.user.GetHistory(globalVariables.PatientID);
+            //ViewBag.data = symptoms.symptoms;
+
+            return View(list);
+        }
+
+
+        public ActionResult LogOut()
+        {
+
+            TempData["message"] = "Successfully Log Out";
 
             return View();
         }
@@ -165,6 +179,9 @@ namespace Final_Project.Controllers
                     {
                         //userModel.LoginErrorMessage = "You selected more than 17 symptoms please select only up to 17 symptoms";
                         //return View("Index", userModel);
+
+                        TempData["message"] = "Please select maximum 17 symptoms";
+                        return View(list);
                     }
                     else
                     {
@@ -172,6 +189,7 @@ namespace Final_Project.Controllers
                     }
                 }
             }
+            DataLibrary.Logic.User.symptoms.StoreUserSymptoms(symptomIDs, globalVariables.PatientID);
             return View(list);
         }
     }
