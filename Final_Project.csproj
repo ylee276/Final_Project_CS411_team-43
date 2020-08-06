@@ -163,6 +163,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LoginModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\precaution.cs" />
     <Compile Include="Models\User.cs">
       <DependentUpon>LoginModel.tt</DependentUpon>
     </Compile>
@@ -234,6 +235,7 @@
     <Content Include="Views\Home\GetAllSymptoms.cshtml" />
     <Content Include="Views\Home\GetUserHistory.cshtml" />
     <Content Include="Views\Home\LogOut.cshtml" />
+    <Content Include="Views\Home\SuccessfulDiagonosis.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

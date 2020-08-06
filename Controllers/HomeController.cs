@@ -189,8 +189,35 @@ namespace Final_Project.Controllers
                     }
                 }
             }
-            DataLibrary.Logic.User.symptoms.StoreUserSymptoms(symptomIDs, globalVariables.PatientID);
-            return View(list);
+            //test
+            if(symptomIDs.Count <= 0)
+            {
+                TempData["message"] = "Please select at least 1 symptoms";
+                return View(list);
+            }
+            int id = DataLibrary.Logic.User.symptoms.StoreUserSymptoms(symptomIDs, globalVariables.PatientID);
+            return RedirectToAction("SuccessfulDiagonosis", new { id = id });
+
+
+
         }
+        //[HttpGet]
+        //[ValidateAntiForgeryToken]
+        public ActionResult SuccessfulDiagonosis(int id = 0)
+        {
+            List<DataLibrary.Models.Disease.Precaution> precautionsList = new List<DataLibrary.Models.Disease.Precaution>();
+            precautionsList = DataLibrary.Logic.User.symptoms.helperPrecautions(id);
+            foreach (DataLibrary.Models.Disease.Precaution precaution in precautionsList)
+            {
+                if (precaution.errorMessage != null)
+                {
+                    TempData["message"] = precaution.errorMessage;
+
+                    return RedirectToAction("GetAllSymptoms");
+                }
+            }
+            return View(precautionsList);
+        }
+
     }
 }

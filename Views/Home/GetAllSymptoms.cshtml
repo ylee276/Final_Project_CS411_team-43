@@ -1,6 +1,6 @@
 ﻿@model List<DataLibrary.Models.User.user_symptoms>
 @{
-    ViewBag.Title = "All Symptoms";
+    ViewBag.Title = "Diagnostic";
     if (TempData["message"] != null)
     {
         <script type="text/javascript">
@@ -8,24 +8,55 @@
         </script>
     }
 }
-
+<style>
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+</style>
 
 @using (Html.BeginForm("GetAllSymptoms", "Home"))
 {
     @Html.AntiForgeryToken()
     <div class="form-horizontal">
-        <h4>All Symptoms stored</h4>
+        <h3>Select up to 17 symptoms to get diagnoses </h3>
     </div>
     <div>
+    <table>
+        <tr>
+            @for (int i = 0; i < Model.Count(); i++)
+            {
+                @Html.HiddenFor(it => it[i].Id)
 
-        @for (int i = 0; i < Model.Count(); i++)
-        {
-            @Html.HiddenFor(it => it[i].Id)
-            @Html.DisplayFor(it => it[i].symptom)
-            @Html.HiddenFor(it => it[i].symptom)
-            @Html.CheckBoxFor(it => it[i].Checked)
-            <br />
-        }
+                <tr>
+                    @Html.DisplayFor(it => it[i].symptom)
+                
+                </tr>
+
+                @Html.HiddenFor(it => it[i].symptom)
+
+                <tr>
+                    @Html.CheckBoxFor(it => it[i].Checked)
+                    <h4> </h4>
+                
+                </tr>
+            }
+        </tr>
+    </table>
+
+        @*<tr>
+            <th>Month</th>
+            <th>Savings</th>
+        </tr>
+        <tr>
+            <td>January</td>
+            <td>$100</td>
+        </tr>
+        <tr>
+            <td>February</td>
+            <td>$80</td>
+        </tr>*@
+    
 
 
         <input id="Submit1" type="submit" value="submit" />
